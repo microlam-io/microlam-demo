@@ -1,0 +1,34 @@
+[
+{
+  "name":"org.apache.geronimo.osgi.locator.ProviderLocator"
+},
+{
+  "name":"org.apache.johnzon.core.JsonProviderImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.johnzon.core.JsonReaderFactoryImpl",
+  "methods":[{"name":"createReader","parameterTypes":["javax.json.stream.JsonParser"] }]
+},
+{
+  "name":"tech.solusoft.bs.BusinessProcessorMult"}
+,
+{
+  "name":"tech.solusoft.bs.BusinessProcessorSum"}
+,
+{
+  "name":"tech.solusoft.lambda.MicrolamDemo",
+  "methods":[{"name":"<init>","parameterTypes":[] }]}
+,
+{
+  "name":"tech.solusoft.lambda.body.LambdaBodyIn",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true}
+,
+{
+  "name":"tech.solusoft.lambda.body.LambdaBodyOut",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true}
+]

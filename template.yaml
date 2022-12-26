@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  microlam-demo
+
+  Sample SAM Template for microlam-demo
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 20
+    SnapStart:
+       ApplyOn: PublishedVersions
+  Api:
+    EndpointConfiguration: REGIONAL
+
+Resources:
+  MicrolamDemo:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: MicrolamDemo
+      CodeUri: ./target/microlam-demo-1.0-SNAPSHOT-aws-lambda.zip
+      Handler: tech.solusoft.lambda.MicrolamDemo
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+        Variables:
+          PARAM1: VALUE
+      Events:
+        MicrolamDemoApi1:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /mult
+            Method: post
+        MicrolamDemoApi2:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /sum
+            Method: post
+            
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  MicrolamDemoApi:
+    Description: "API Gateway endpoint URL for Prod stage for MicrolamDemo function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  MicrolamDemo:
+    Description: "MicrolamDemo Function ARN"
+    Value: !GetAtt MicrolamDemo.Arn
+  MicrolamDemoIamRole:
+    Description: "Implicit IAM Role created for MicrolamDemo function"
+    Value: !GetAtt MicrolamDemoRole.Arn
